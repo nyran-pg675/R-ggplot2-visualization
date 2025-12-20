@@ -1,11 +1,10 @@
+# Simple Pie Chart
 library(ggplot2)
-
 # Create dataset
 sales_data <- data.frame(
   Category = c("Electronics", "Clothing", "Furniture", "Groceries", "Books"),
   Units_Sold = c(250, 180, 120, 300, 90)
 )
-
 # Create pie chart
 ggplot(sales_data, aes(x = "", y = Units_Sold, fill = Category)) +
   geom_bar(stat = "identity", width = 1) +
@@ -15,3 +14,5 @@ ggplot(sales_data, aes(x = "", y = Units_Sold, fill = Category)) +
     fill = "Category"
   ) +
   theme_void()
+
+# Advance Pie Chart
