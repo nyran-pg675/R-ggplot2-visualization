@@ -1,3 +1,4 @@
+# Simple Bar CHart
 # Install ggplot2 (ONLY ONCE)
 install.packages("ggplot2")
 
@@ -21,3 +22,44 @@ ggplot(sales_data, aes(x = Category, y = Units_Sold)) +
     y = "Units Sold"
   ) +
   theme_minimal()
+
+# Advance Bar Chart 
+library(ggplot2)
+
+# Create dataset
+sales_data <- data.frame(
+  Category = c("Electronics", "Clothing", "Furniture", "Groceries", "Books"),
+  Units_Sold = c(250, 180, 120, 300, 90)
+)
+
+# Plot bar chart
+ggplot(sales_data, aes(x = Category, y = Units_Sold)) +
+  geom_bar(
+    stat = "identity",
+    fill = "steelblue",
+    color = "black",
+    width = 0.7
+  ) +
+  labs(
+    title = "Units Sold by Category",
+    x = "Category",
+    y = "Units Sold"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.background = element_rect(
+      color = "black",
+      fill = "white",
+      linewidth = 0.8
+    ),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(
+      hjust = 0.5,
+      face = "bold",
+      size = 14
+    ),
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black")
+  )
+
