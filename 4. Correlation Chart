@@ -1,0 +1,21 @@
+library(ggplot2)
+
+ggplot(water_data, aes(x = Temperature, y = Dissolved_Oxygen)) +
+  geom_point(size = 3, shape = 21, fill = "steelblue", color = "black") +
+  geom_smooth(method = "lm", linewidth = 1, se = TRUE, color = "black") +
+  labs(
+    title = "Relationship Between Water Temperature and Dissolved Oxygen",
+    subtitle = "Simulated Water Quality Dataset",
+    x = "Temperature (°C)",
+    y = "Dissolved Oxygen (mg/L)"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5),
+    axis.title = element_text(face = "bold"),
+    
+    # Gridlines
+    panel.grid.major = element_line(color = "grey80", linewidth = 0.4),
+    panel.grid.minor = element_line(color = "grey90", linewidth = 0.2)
+  )
