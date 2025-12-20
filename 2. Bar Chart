@@ -1,0 +1,23 @@
+# Install ggplot2 (ONLY ONCE)
+install.packages("ggplot2")
+
+# Load ggplot2 (EVERY SESSION)
+library(ggplot2)
+
+library(ggplot2)
+
+sales_data <- data.frame(
+  Category = c("Electronics", "Clothing", "Furniture", "Groceries", "Books"),
+  Units_Sold = c(250, 180, 120, 300, 90)
+)
+
+print(sales_data)
+
+ggplot(sales_data, aes(x = Category, y = Units_Sold)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Units Sold by Category",
+    x = "Category",
+    y = "Units Sold"
+  ) +
+  theme_minimal()
