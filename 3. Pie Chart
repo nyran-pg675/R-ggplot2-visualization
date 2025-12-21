@@ -16,3 +16,42 @@ ggplot(sales_data, aes(x = "", y = Units_Sold, fill = Category)) +
   theme_void()
 
 # Advance Pie Chart
+# Load required libraries
+library(ggplot2)
+library(scales)
+
+# Generate sample data
+data <- data.frame(
+  Category = c("Forest", "Agriculture", "Urban", "Water", "Barren"),
+  Value = c(40, 30, 15, 10, 5)
+)
+
+# Calculate percentage
+data$Percentage <- data$Value / sum(data$Value)
+
+# Pie chart with boundary
+ggplot(data, aes(x = "", y = Percentage, fill = Category)) +
+  geom_bar(
+    stat = "identity",
+    width = 1,
+    color = "black",   # Boundary color
+    size = 0.6         # Boundary thickness
+  ) +
+  coord_polar(theta = "y") +
+  geom_text(
+    aes(label = percent(Percentage)),
+    position = position_stack(vjust = 0.5),
+    size = 4
+  ) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Land Use Distribution",
+    subtitle = "Proportional representation of land categories",
+    fill = "Land Use Type"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5),
+    legend.title = element_text(face = "bold")
+  )
