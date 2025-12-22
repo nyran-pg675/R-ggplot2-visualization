@@ -1,0 +1,43 @@
+# Data manipulation
+library(readr)
+library(dplyr)
+library(tidyr)
+
+# Visualization
+library(ggplot2)
+
+# Replace with your actual file path
+file_path <- "C:/Users/Nyran Tahija/Desktop/karkar_SST_Monthly_Celsius.csv"
+
+df <- read_csv(file_path)
+
+cat("Data loaded successfully! Preview:\n")
+head(df)
+
+# Ensure month and year are integers
+df <- df %>%
+  mutate(
+    month = as.integer(month),
+    year  = as.integer(year)
+  )
+
+# Equivalent to pandas pivot_table
+pivot_table <- df %>%
+  group_by(year, month) %>%
+  summarise(mean_SST_C = mean(mean_SST_C, na.rm = TRUE), .groups = "drop")
+
+ggplot(pivot_table, aes(x = factor(month), y = factor(year), fill = mean_SST_C)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(mean_SST_C, 1)), size = 3) +
+  scale_fill_gradient(low = "yellow", high = "red", name = "SST (°C)") +
+  labs(
+    title = "Monthly Sea Surface Temperature (SST) — Gulf of Kachchh",
+    x = "Month",
+    y = "Year"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 0),
+    axis.text.y = element_text(angle = 0),
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
